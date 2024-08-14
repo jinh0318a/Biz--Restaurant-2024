@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.callor.restaurant.config.DataGoConfig;
-import com.callor.restaurant.model.ImageVO;
+import com.callor.restaurant.model.Image;
 import com.callor.restaurant.service.ImageService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ImageServiceImpl implements ImageService {
 
 	@Override
-	public List<ImageVO> imageList() {
+	public List<Image> imageList() {
 		String apiURI = DataGoConfig.IMAGES_URL;
 		apiURI += "?serviceKey=" + DataGoConfig.GO_API_KEY;
 
@@ -41,8 +41,8 @@ public class ImageServiceImpl implements ImageService {
 			return response;
 		});
 
-		ResponseEntity<ImageVO> imgListEntity = restTemplate.exchange(imgURI, HttpMethod.GET, null, ImageVO.class);
-		List<ImageVO> imgList = (List<ImageVO>) imgListEntity;
+		ResponseEntity<Image> imgListEntity = restTemplate.exchange(imgURI, HttpMethod.GET, null, Image.class);
+		List<Image> imgList = (List<Image>) imgListEntity;
 
 		log.debug("받은데이터 {}", imgList.toString());
 

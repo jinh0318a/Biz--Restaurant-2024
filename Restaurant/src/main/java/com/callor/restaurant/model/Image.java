@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ImageVO {
+public class Image {
 	public String foodUid; // 데이터번호
 	public String siteUid; // 사이트번호
 	public String privewUrl; // 원본이미지경로
