@@ -18,8 +18,8 @@ public class Finedust {
 	public String PM2_5; // : 12.6 초미세먼지
 	public String CO2; // : 459.0,
 	public String TEMPERATURE; // : 42.0,
-	public String HUMIDITY; // : 35.5,
-	public String LATITUDE; // : 35.17861940,
-	public String LONGITUDE; // : 126.8066483,
-	public String COLLECTION_DATE; // : 2024-08-14 16:20:59.0
+	public String HUMIDITY; // : 35.5, 습도
+	public String LATITUDE; // : 35.17861940, 위도
+	public String LONGITUDE; // : 126.8066483, 경도
+	public String COLLECTION_DATE; // : 2024-08-14 16:20:59.0 측정시간
 }

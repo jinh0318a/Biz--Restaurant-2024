@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{home}"
+>
+  <section th:fragment="content" class="list">
+    <ul class="finedust-list">
+      <li th:each="DUST:${FINEDUST_LIST}" th:attr="data-id=${DUST.place}">
+        <span th:text="${DUST.place}" class="item">측정소</span>
+        <span th:text="${DUST.PM10}" class="item">미세먼지</span>
+        <span th:text="${DUST.PM2_5}" class="item">초미세먼지</span>
+        <span th:text="${DUST.HUMIDITY}" class="item">습도</span>
+        <span th:text="${DUST.LATITUDE}" class="item">위도</span>
+        <span th:text="${DUST.LONGITUDE}" class="item">경도</span>
+        <span th:text="${DUST.COLLECTION_DATE}" class="item">측정시간</span>
+      </li>
+    </ul>
+  </section>
+</html>
