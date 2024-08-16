@@ -25,7 +25,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<Finedust> finedustList = fineDustService.findedustList();
+
+		List<Finedust> finedustList = fineDustService.lastData();
 		model.addAttribute("FINEDUST_LIST", finedustList);
 
 		return "list";

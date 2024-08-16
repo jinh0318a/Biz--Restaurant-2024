@@ -1,8 +1,12 @@
 package com.callor.finedust.service.impl;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -50,14 +54,10 @@ public class FineDustServiceImpl implements FineDustService {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		// 헤더 설정
 		HttpHeaders headers = new HttpHeaders();
-		// Accept 헤더 비우기 (헤더를 설정하지 않음)
 
-		// 요청 생성
 		HttpEntity<String> entity = new HttpEntity<>(headers);
 
-		// API 호출
 		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
 		String jsonResponse = response.getBody();
@@ -66,7 +66,6 @@ public class FineDustServiceImpl implements FineDustService {
 		try {
 			ApiResponse apiResponse = objectMapper.readValue(jsonResponse, ApiResponse.class);
 
-			// ApiResponse 객체에서 데이터 추출
 			if (apiResponse != null) {
 				finedustList = apiResponse.getResponse().getItems();
 			}
@@ -75,6 +74,49 @@ public class FineDustServiceImpl implements FineDustService {
 		}
 
 		return finedustList;
+	}
+
+	@Override
+	public List<Finedust> lastData() {
+		String url = "http://openapi.airgwangsan.kr:8080/Gwangsan/getDustDataAPI?apiId=01";
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+
+		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+		String jsonResponse = response.getBody();
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<Finedust> finedustList = new ArrayList<Finedust>();
+		try {
+			ApiResponse apiResponse = objectMapper.readValue(jsonResponse, ApiResponse.class);
+
+			if (apiResponse != null) {
+				finedustList = apiResponse.getResponse().getItems();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+
+		finedustList.sort((f1, f2) -> {
+			LocalDateTime dateTime1 = LocalDateTime.parse(f1.COLLECTION_DATE, formatter);
+			LocalDateTime dateTime2 = LocalDateTime.parse(f2.COLLECTION_DATE, formatter);
+			return dateTime1.compareTo(dateTime2);
+		});
+
+		Map<String, Finedust> latestDataMap = new HashMap<>();
+
+		for (Finedust finedust : finedustList) {
+			latestDataMap.put(finedust.place, finedust);
+		}
+
+		List<Finedust> lastData = new ArrayList<>(latestDataMap.values());
+
+		return lastData;
 	}
 
 }

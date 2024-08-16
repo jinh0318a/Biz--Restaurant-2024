@@ -6,4 +6,6 @@ import com.callor.finedust.model.Finedust;
 
 public interface FineDustService {
 	public List<Finedust> findedustList();
+
+	public List<Finedust> lastData();
 }
