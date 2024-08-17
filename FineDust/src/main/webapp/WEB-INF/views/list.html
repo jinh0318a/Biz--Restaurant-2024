@@ -7,6 +7,15 @@
 >
   <section th:fragment="content" class="list">
     <ul class="finedust-list">
+      <li>
+        <span>측정소</span>
+        <span>미세먼지</span>
+        <span>초미세먼지</span>
+        <span>습도</span>
+        <span>위도</span>
+        <span>경도</span>
+        <span>측정시간</span>
+      </li>
       <li th:each="DUST:${FINEDUST_LIST}" th:attr="data-id=${DUST.place}">
         <span th:text="${DUST.place}" class="item">측정소</span>
         <span th:text="${DUST.PM10}" class="item">미세먼지</span>
