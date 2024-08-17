@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finedust Details on OSM with Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      #map {
+        height: 600px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script th:inline="javascript">
+      // Thymeleaf 데이터에서 JSON 문자열로 전달된 데이터
+      var finedustList = /*[[${finedustList}]]*/ [];
+
+      // 디버그용 로그: 데이터가 올바르게 전달되었는지 확인
+      console.log(finedustList);
+
+      // JSON 문자열을 JavaScript 객체로 변환
+      var finedustListParsed = JSON.parse(finedustList);
+
+      // 지도 초기화
+      var map = L.map("map").setView([35.1525803, 126.8111572], 13);
+
+      // OpenStreetMap 타일 레이어 추가
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      // Finedust 데이터에서 각 위치에 마커 추가
+      finedustListParsed.forEach(function (finedust) {
+        var lat = parseFloat(finedust.LATITUDE);
+        var lon = parseFloat(finedust.LONGITUDE);
+
+        if (!isNaN(lat) && !isNaN(lon)) {
+          var marker = L.marker([lat, lon]).addTo(map);
+          marker.bindPopup(
+            `<b>${finedust.place}</b><br>` +
+              `미세먼지: ${finedust.PM10}<br>` +
+              `초미세먼지: ${finedust.PM2_5}<br>` +
+              `습도: ${finedust.HUMIDITY}<br>` +
+              `측정시간: ${finedust.COLLECTION_DATE}`
+          );
+        } else {
+          console.error("Invalid latitude or longitude for:", finedust);
+        }
+      });
+    </script>
+  </body>
+</html>

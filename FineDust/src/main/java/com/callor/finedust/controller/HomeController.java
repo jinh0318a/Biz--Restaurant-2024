@@ -1,10 +1,11 @@
 package com.callor.finedust.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +26,8 @@ public class HomeController {
 		super();
 		this.fineDustService = fineDustService;
 	}
-
+	
+	// 홈
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 
@@ -34,9 +36,26 @@ public class HomeController {
 
 		return "list";
 	}
+	
+	// 디테일
+	@RequestMapping(value = "/detail/{place}")
+	public String detail(@PathVariable(name = "place") String place, Model model) {
+		List<Finedust> finedustList = fineDustService.findedustList();
 
-	@GetMapping("/detail")
-	public String detail(Model model) throws JsonProcessingException {
+		List<Finedust> searchList = new ArrayList<Finedust>();
+
+		for (Finedust one : finedustList) {
+			if (one.place.equals(place)) {
+				searchList.add(one);
+			}
+		}
+
+		return "detail";
+	}
+	
+	// 한눈에 보기
+	@RequestMapping(value = "/once", method = RequestMethod.GET)
+	public String once(Model model) throws JsonProcessingException {
 		List<Finedust> finedustList = fineDustService.lastData();
 
 		// Convert list to JSON string
@@ -46,7 +65,7 @@ public class HomeController {
 		// Add JSON string to model
 		model.addAttribute("finedustList", finedustListJson);
 
-		return "detail";
+		return "once";
 	}
 
 }
