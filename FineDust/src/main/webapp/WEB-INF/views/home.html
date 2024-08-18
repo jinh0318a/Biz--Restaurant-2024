@@ -24,11 +24,12 @@
     ></script>
   </head>
   <body>
-    <header class="main">홈</header>
+    <header class="main">광주광역시 광산구 미세먼지 현황</header>
     <section class="main">
       <!-- <article class="restaurant" th:replace="~{::restaurant}"></article> -->
       <article class="list" th:replace="~{::content}"></article>
-      <article class="detail"></article>
+      <article class="detail">상세보기</article>
     </section>
+    <a th:href="@{/once}">전체보기</a>
   </body>
 </html>
