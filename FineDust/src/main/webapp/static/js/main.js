@@ -8,36 +8,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const PM10 = detail_list.querySelectorAll("span.PM10");
     const PM25 = detail_list.querySelectorAll("span.PM25");
 
-    const applyColorPM10 = (elements) => {
-      elements.forEach((element) => {
-        const value = parseFloat(element.textContent);
+    const applyColorPM10 = (PM10) => {
+      PM10.forEach((PM10) => {
+        const value = parseFloat(PM10.textContent);
         if (isNaN(value)) return;
-
+        PM10.style.color = "white";
         if (value >= 151) {
-          element.style.backgroundColor = "red";
+          PM10.style.backgroundColor = "#e64746";
         } else if (value >= 81 && value <= 150) {
-          element.style.backgroundColor = "yellow";
+          PM10.style.backgroundColor = "#fda60d";
         } else if (value >= 31 && value <= 80) {
-          element.style.backgroundColor = "green";
+          PM10.style.backgroundColor = "#02bc30";
         } else if (value <= 30) {
-          element.style.backgroundColor = "blue";
+          PM10.style.backgroundColor = "#2286f7";
         }
       });
     };
 
-    const applyColorPM25 = (elements) => {
-      elements.forEach((element) => {
-        const value = parseFloat(element.textContent);
+    const applyColorPM25 = (PM25) => {
+      PM25.forEach((PM25) => {
+        const value = parseFloat(PM25.textContent);
         if (isNaN(value)) return;
-
+        PM25.style.color = "white";
         if (value >= 76) {
-          element.style.backgroundColor = "red";
+          PM25.style.backgroundColor = "#e64746";
         } else if (value >= 36 && value <= 75) {
-          element.style.backgroundColor = "yellow";
+          PM25.style.backgroundColor = "#fda60d";
         } else if (value >= 16 && value <= 35) {
-          element.style.backgroundColor = "green";
+          PM25.style.backgroundColor = "#02bc30";
         } else if (value <= 15) {
-          element.style.backgroundColor = "blue";
+          PM25.style.backgroundColor = "#2286f7";
         }
       });
     };

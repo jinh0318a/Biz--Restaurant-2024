@@ -28,10 +28,13 @@
     </style>
   </head>
   <body>
-    <header class="main">광주광역시 광산구 미세먼지 현황</header>
+    <header class="main">
+      <a th:href="@{/}">광주광역시 광산구 미세먼지 현황</a>
+    </header>
     <div id="map"></div>
     <div>
       <h2>광산구 미세먼지 평균</h2>
+      <p>데이터는 약 5분마다 갱신됩니다.</p>
       <table>
         <tr>
           <th>미세먼지(µg/m³)</th>
@@ -73,6 +76,7 @@
             `<b>${finedust.place}</b><br>` +
               `미세먼지: ${finedust.PM10}<br>` +
               `초미세먼지: ${finedust.PM2_5}<br>` +
+              `CO2: ${finedust.CO2}<br>` +
               `습도: ${finedust.HUMIDITY}<br>` +
               `측정시간: ${finedust.COLLECTION_DATE}`
           );
