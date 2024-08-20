@@ -25,11 +25,19 @@
   </head>
   <body>
     <header class="main">광주광역시 광산구 미세먼지 현황</header>
+    <div class="description">
+      <h2 style="background-color: blue">좋음</h2>
+      <h2 style="background-color: green">보통</h2>
+      <h2 style="background-color: yellow">나쁨</h2>
+      <h2 style="background-color: red">매우나쁨</h2>
+    </div>
     <section class="main">
       <!-- <article class="restaurant" th:replace="~{::restaurant}"></article> -->
       <article class="list" th:replace="~{::content}"></article>
       <article class="detail"></article>
     </section>
-    <a th:href="@{/once}">전체보기</a>
+    <div class="main">
+      <a th:href="@{/once}">전체보기</a>
+    </div>
   </body>
 </html>

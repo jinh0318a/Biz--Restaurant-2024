@@ -6,10 +6,8 @@
   layout:decorate="~{home}"
 >
   <section th:fragment="content" class="list">
+    <h1>측정소</h1>
     <ul class="finedust-list">
-      <li>
-        <h1>측정소</h1>
-      </li>
       <li th:each="DUST:${FINEDUST_LIST}" th:attr="data-place=${DUST.place}">
         <span th:text="${DUST.place}" class="item">측정소</span>
       </li>

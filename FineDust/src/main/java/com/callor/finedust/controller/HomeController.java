@@ -62,20 +62,24 @@ public class HomeController {
 		double PM10 = 0;
 		double PM2_5 = 0;
 		double humidity = 0;
+		double CO2 = 0;
 
 		for (Finedust one : finedustList) {
 			PM10 += Double.valueOf(one.PM10);
 			PM2_5 += Double.valueOf(one.PM2_5);
 			humidity += Double.valueOf(one.HUMIDITY);
+			CO2 += Double.valueOf(one.CO2);
 		}
 
 		PM10 = PM10 / finedustList.size();
 		PM2_5 = PM2_5 / finedustList.size();
 		humidity = humidity / finedustList.size();
+		CO2 = CO2 / finedustList.size();
 
 		String PM10Avg = String.format("%.2f", PM10);
 		String PM2_5Avg = String.format("%.2f", PM2_5);
 		String humidityAvg = String.format("%.2f", humidity);
+		String CO2Avg = String.format("%.2f", CO2);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String finedustListJson = objectMapper.writeValueAsString(finedustList);
@@ -84,6 +88,7 @@ public class HomeController {
 		model.addAttribute("PM10", PM10Avg);
 		model.addAttribute("PM2_5", PM2_5Avg);
 		model.addAttribute("HUMIDITY", humidityAvg);
+		model.addAttribute("CO2", CO2Avg);
 
 		return "once";
 	}

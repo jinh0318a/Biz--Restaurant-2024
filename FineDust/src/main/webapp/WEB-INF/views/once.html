@@ -9,10 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>광주광역시 광산구 미세먼지 현황</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="../../static/css/once.css"
+      th:href="@{/static/css/once.css}"
+    />
     <style>
       #map {
         height: 600px;
-        width: 100%;
+        width: 80%;
+        margin: 0 auto;
       }
     </style>
   </head>
@@ -23,30 +29,20 @@
       <h2>광산구 미세먼지 평균</h2>
       <table>
         <tr>
-          <th>미세먼지</th>
-          <th>초미세먼지</th>
-          <th>습도</th>
+          <th>미세먼지(µg/m³)</th>
+          <th>초미세먼지(µg/m³)</th>
+          <th>CO2(ppm)</th>
+          <th>습도(%)</th>
         </tr>
         <tr>
-          <td
-            th:text="${PM10 + 'µg/m³'}"
-            class="PM10"
-            th:attr="data-place=${PM10}"
-          ></td>
-          <td
-            th:text="${PM2_5 + 'µg/m³'}"
-            class="PM25"
-            th:attr="data-place=${PM2_5}"
-          ></td>
-          <td
-            th:text="${HUMIDITY + '%'}"
-            class="HUMIDITY"
-            th:attr="data-place=${HUMIDITY}"
-          ></td>
+          <td th:text="${PM10}" class="PM10"></td>
+          <td th:text="${PM2_5}" class="PM25"></td>
+          <td th:text="${CO2}" class="CO2"></td>
+          <td th:text="${HUMIDITY}" class="HUMIDITY"></td>
         </tr>
       </table>
     </div>
-    <div>
+    <div class="back">
       <a th:href="@{/}">돌아가기</a>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

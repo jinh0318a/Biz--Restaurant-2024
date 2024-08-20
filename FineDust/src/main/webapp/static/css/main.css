@@ -39,6 +39,16 @@ body {
   gap: 5px;
 }
 
+div.description {
+  display: flex;
+  width: 50%;
+  margin: 10px auto;
+  h2 {
+    flex: 1;
+    text-align: center;
+  }
+}
+
 section.main {
   height: 80%;
   width: 80%;
@@ -52,8 +62,13 @@ section.main {
 
 section.list {
   text-align: center;
-  height: 80%;
+  height: 95%;
   flex: 1;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
   ul {
     height: 100%;
     list-style: none;
@@ -64,13 +79,18 @@ section.list {
   }
 }
 article.detail {
-  height: 80%;
+  height: 95%;
   flex: 2;
+
   section.detail {
     height: 100%;
     text-align: center;
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
     ul {
-      height: 100%;
+      height: 95%;
       list-style: none;
       overflow-y: auto;
       li {
@@ -86,4 +106,9 @@ article.detail {
 
 ul.finedust-list::-webkit-scrollbar {
   display: none;
+}
+
+div.main {
+  font-size: 1.5rem;
+  font-weight: 900;
 }
