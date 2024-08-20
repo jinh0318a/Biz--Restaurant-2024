@@ -5,7 +5,15 @@
   xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 >
   <section th:fragment="detail" class="detail">
-    <h1 th:text="${FINEDUST_LIST.get(0).place}">측정소</h1>
+    <div class="title">
+      <h1 th:text="${FINEDUST_LIST.get(0).place}">측정소</h1>
+      <div class="description">
+        <span style="background-color: blue">좋음</span>
+        <span style="background-color: green">보통</span>
+        <span style="background-color: yellow">나쁨</span>
+        <span style="background-color: red">매우나쁨</span>
+      </div>
+    </div>
     <ul class="finedust-list">
       <li>
         <span>미세먼지(μg/m3)</span>

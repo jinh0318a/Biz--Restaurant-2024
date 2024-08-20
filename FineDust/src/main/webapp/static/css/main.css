@@ -39,16 +39,6 @@ body {
   gap: 5px;
 }
 
-div.description {
-  display: flex;
-  width: 50%;
-  margin: 10px auto;
-  h2 {
-    flex: 1;
-    text-align: center;
-  }
-}
-
 section.main {
   height: 80%;
   width: 80%;
@@ -111,4 +101,20 @@ ul.finedust-list::-webkit-scrollbar {
 div.main {
   font-size: 1.5rem;
   font-weight: 900;
+}
+
+div.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div.description {
+    width: 80%;
+    display: flex;
+    span {
+      flex: 1;
+      text-align: center;
+    }
+  }
 }
