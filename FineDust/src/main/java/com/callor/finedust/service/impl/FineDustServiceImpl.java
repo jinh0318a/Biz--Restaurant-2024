@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.callor.finedust.config.DataGoConfig;
 import com.callor.finedust.model.ApiResponse;
 import com.callor.finedust.model.Finedust;
 import com.callor.finedust.service.FineDustService;
@@ -50,7 +51,7 @@ public class FineDustServiceImpl implements FineDustService {
 //				Finedust.class);
 //		log.debug(busArriveEntity.toString());
 
-		String url = "http://openapi.airgwangsan.kr:8080/Gwangsan/getDustDataAPI?apiId=01";
+		String url = DataGoConfig.FINEDUST_URL;
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -78,7 +79,7 @@ public class FineDustServiceImpl implements FineDustService {
 
 	@Override
 	public List<Finedust> lastData() {
-		String url = "http://openapi.airgwangsan.kr:8080/Gwangsan/getDustDataAPI?apiId=01";
+		String url = DataGoConfig.FINEDUST_URL;
 
 		RestTemplate restTemplate = new RestTemplate();
 

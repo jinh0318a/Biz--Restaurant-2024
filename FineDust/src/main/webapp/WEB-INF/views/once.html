@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Finedust Details on OSM with Leaflet</title>
+    <title>광주광역시 광산구 미세먼지 현황</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
       #map {
@@ -13,28 +17,51 @@
     </style>
   </head>
   <body>
+    <header class="main">광주광역시 광산구 미세먼지 현황</header>
     <div id="map"></div>
+    <div>
+      <h2>광산구 미세먼지 평균</h2>
+      <table>
+        <tr>
+          <th>미세먼지</th>
+          <th>초미세먼지</th>
+          <th>습도</th>
+        </tr>
+        <tr>
+          <td
+            th:text="${PM10 + 'µg/m³'}"
+            class="PM10"
+            th:attr="data-place=${PM10}"
+          ></td>
+          <td
+            th:text="${PM2_5 + 'µg/m³'}"
+            class="PM25"
+            th:attr="data-place=${PM2_5}"
+          ></td>
+          <td
+            th:text="${HUMIDITY + '%'}"
+            class="HUMIDITY"
+            th:attr="data-place=${HUMIDITY}"
+          ></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <a th:href="@{/}">돌아가기</a>
+    </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script th:inline="javascript">
-      // Thymeleaf 데이터에서 JSON 문자열로 전달된 데이터
       var finedustList = /*[[${finedustList}]]*/ [];
 
-      // 디버그용 로그: 데이터가 올바르게 전달되었는지 확인
-      console.log(finedustList);
-
-      // JSON 문자열을 JavaScript 객체로 변환
       var finedustListParsed = JSON.parse(finedustList);
 
-      // 지도 초기화
       var map = L.map("map").setView([35.1525803, 126.8111572], 13);
 
-      // OpenStreetMap 타일 레이어 추가
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      // Finedust 데이터에서 각 위치에 마커 추가
       finedustListParsed.forEach(function (finedust) {
         var lat = parseFloat(finedust.LATITUDE);
         var lon = parseFloat(finedust.LONGITUDE);

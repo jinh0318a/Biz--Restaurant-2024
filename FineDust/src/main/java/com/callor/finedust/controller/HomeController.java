@@ -59,12 +59,31 @@ public class HomeController {
 	public String once(Model model) throws JsonProcessingException {
 		List<Finedust> finedustList = fineDustService.lastData();
 
-		// Convert list to JSON string
+		double PM10 = 0;
+		double PM2_5 = 0;
+		double humidity = 0;
+
+		for (Finedust one : finedustList) {
+			PM10 += Double.valueOf(one.PM10);
+			PM2_5 += Double.valueOf(one.PM2_5);
+			humidity += Double.valueOf(one.HUMIDITY);
+		}
+
+		PM10 = PM10 / finedustList.size();
+		PM2_5 = PM2_5 / finedustList.size();
+		humidity = humidity / finedustList.size();
+
+		String PM10Avg = String.format("%.2f", PM10);
+		String PM2_5Avg = String.format("%.2f", PM2_5);
+		String humidityAvg = String.format("%.2f", humidity);
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		String finedustListJson = objectMapper.writeValueAsString(finedustList);
 
-		// Add JSON string to model
 		model.addAttribute("finedustList", finedustListJson);
+		model.addAttribute("PM10", PM10Avg);
+		model.addAttribute("PM2_5", PM2_5Avg);
+		model.addAttribute("HUMIDITY", humidityAvg);
 
 		return "once";
 	}
