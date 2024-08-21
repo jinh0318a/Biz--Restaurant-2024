@@ -29,9 +29,19 @@ public class HomeController {
 
 	// 홈
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(@RequestParam(name = "station", required = false, defaultValue = "") String station,
+			Model model) {
+		List<Finedust> finedustList = new ArrayList<Finedust>();
+		if (station == null || station.isBlank()) {
+			finedustList = fineDustService.lastData();
+		} else {
+			for (Finedust one : fineDustService.lastData()) {
+				if (one.place.contains(station)) {
+					finedustList.add(one);
+				}
+			}
+		}
 
-		List<Finedust> finedustList = fineDustService.lastData();
 		model.addAttribute("FINEDUST_LIST", finedustList);
 
 		return "list";
