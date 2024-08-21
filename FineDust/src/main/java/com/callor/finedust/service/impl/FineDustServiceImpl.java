@@ -31,9 +31,9 @@ public class FineDustServiceImpl implements FineDustService {
 	public List<Finedust> findedustList() {
 //		String apiURL = DataGoConfig.FINEDUST_URL;
 //
-//		URI arriveURI = null;
+//		URI apiURI = null;
 //		try {
-//			arriveURI = new URI(apiURL);
+//			apiURI = new URI(apiURL);
 //		} catch (URISyntaxException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -47,9 +47,9 @@ public class FineDustServiceImpl implements FineDustService {
 //			return response;
 //		});
 //
-//		ResponseEntity<Finedust> busArriveEntity = restTemplate.exchange(arriveURI, HttpMethod.GET, null,
+//		ResponseEntity<Finedust> finedustEntity = restTemplate.exchange(apiURI, HttpMethod.GET, null,
 //				Finedust.class);
-//		log.debug(busArriveEntity.toString());
+//		log.debug(finedustEntity.toString());
 
 		String url = DataGoConfig.FINEDUST_URL;
 
